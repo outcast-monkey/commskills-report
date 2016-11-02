@@ -1,28 +1,30 @@
-// this file provides an example of how to create a basic class inheritance in C++
+// this file provides an example of a class inheritance structure with protected and private members
 // this code is adapted from lectures 10-12 in COMP SCI 1102 Object Oriented Programming 2015. University of Adelaide
-// C++ has several standard libraries which contain functions
-// These are included by the following code #include <library_name>
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-
 class Animal {
-public:
-// member variables ( state )
+private:
+  string id;
+protected:
+  // member variables ( state )
   string name;
   string food;
   int age;
-/** constructors == template for standard object **/
+public:
+  /** constructors == template for standard object **/
   // default constructor
   Animal();
   // special constructor
   Animal(string _name, string _food, int _age);
-// member functions ( behaviour )
+  // member functions ( behaviour )
   void eatFood(string _food);
   void makeNoise();
   int getAge();
+  void setID(string _id);
+  string getID();
 };
 
 // implementation of members
@@ -30,6 +32,7 @@ Animal::Animal(){
   name = "Bob";
   food = "chicken";
   age = 35;
+  id = "a10000";
   cout << "Animal default constructor: " << "An animal called " << name << " is eating " << food << endl;
   cout << "Default values for name and food have been used when no values have been provided" << endl;
 }
@@ -52,9 +55,14 @@ void Animal::makeNoise(){
 int Animal::getAge(){
   return age;
 }
-
+void Animal::setID(string _id){
+  id = _id;
+}
+string Animal::getID(){
+  return id;
+}
 class Panda : public Animal {
-protected:
+private:
   int n_books;
 public:
   Panda(string _name, string _food, int _age);
@@ -72,7 +80,7 @@ void Panda::readsBooks(){
 
 //Derived class - Tiger
 class Tiger : public Animal {
-protected:
+private:
   int n_prey;
 public:
   Tiger(string _name, string _food, int _age);
@@ -86,28 +94,31 @@ Tiger::Tiger(string _name, string _food, int _age) : Animal(_name,_food, _age), 
 
 void Tiger::killsPrey(){
   n_prey++;
-  cout << "Tiger specific: " <<name << " the Tiger has killed " << n_prey << " animal/s. " << endl;
+  cout << "Tiger specific: " << name << " the Tiger has killed " << n_prey << " animal/s. " << endl;
 }
+
 // driver code
 int main(){
   // Stack objects -- can also use dynamic variables
   // Generic Animal
   Animal A1("Bob","chicken", 40);
+  A1.setID("a1160775");
+  cout << "Animal only attribute ( private ): " << A1.getID() << endl;
   A1.eatFood("pasta");
   A1.makeNoise();
-  cout << A1.name << " is " << A1.getAge() << " years old. " << endl ;
-  
+  cout << "Animal " << " is " << A1.getAge() << " years old. " << endl ;
+  cout << endl;
   // Panda
   Panda P1("Petra","fish",26);
   A1.eatFood("pasta");
   P1.readsBooks();
   P1.makeNoise();
-  cout << P1.name << " is " << P1.getAge() << " years old. " << endl ;
-  
+  cout << "Panda " << " is " << P1.getAge() << " years old. " << endl ;
+  cout << endl;
   // Tiger
   Tiger T1("Ted","carrots",37);
   A1.eatFood("pasta");
   T1.killsPrey();
   T1.makeNoise();
-  cout << T1.name << " is " << T1.getAge() << " years old. " << endl ;
+  cout << "Tiger " << " is " << T1.getAge() << " years old. " << endl ;
 }
