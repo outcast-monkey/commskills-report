@@ -1,7 +1,8 @@
 // this file provides an example of how to create a basic class inheritance in C++
 // this code is adapted from lectures 10-12 in COMP SCI 1102 Object Oriented Programming 2015. University of Adelaide
-// C++ has several standard libraries which contain functions
-// These are included by the following code #include <library_name>
+// to run the code, type g++ -Wall <filename>.cpp and then ENTER. this will create an executable object file.
+// then type ./a.out to run the executable file
+
 #include <iostream>
 #include <string>
 

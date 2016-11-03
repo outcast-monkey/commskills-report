@@ -1,15 +1,17 @@
 // this file provides an example of a class inheritance structure with protected and private members
 // this code is adapted from lectures 10-12 in COMP SCI 1102 Object Oriented Programming 2015. University of Adelaide
+// to run the code, type g++ -Wall <filename>.cpp and then ENTER. this will create an executable object file.
+// then type ./a.out to run the executable file
 #include <iostream>
 #include <string>
-
+#include <typeinfo>
 using namespace std;
 
 class Animal {
+// member variables ( state )
 private:
   string id;
-protected:
-  // member variables ( state )
+public:
   string name;
   string food;
   int age;
@@ -99,9 +101,9 @@ void Tiger::killsPrey(){
 
 // driver code
 int main(){
-  // Stack objects -- can also use dynamic variables
   // Generic Animal
   Animal A1("Bob","chicken", 40);
+  // private member of Animal
   A1.setID("a1160775");
   cout << "Animal only attribute ( private ): " << A1.getID() << endl;
   A1.eatFood("pasta");
@@ -121,4 +123,13 @@ int main(){
   T1.killsPrey();
   T1.makeNoise();
   cout << "Tiger " << " is " << T1.getAge() << " years old. " << endl ;
+  
+  // I can't set an ID for Panda/Tiger directly, as it is a private member
+  // The public member function therefore returns a blank result, when we call it on a derived object
+  // However, we can set it equal to a base object.
+  Animal A2 = T1;
+  A2.setID("a116611");
+  // should print out the Tiger's name (Ted)
+  cout << A2.name << " has ID" << A2.getID() << endl;
+  
 }

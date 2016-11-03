@@ -1,5 +1,8 @@
-// this file provides an example of how to implement polymorphism
+// this file provides an example of how to implement polymorphism.
+// the function that we will be making polymorphic is makeNoise().
 // this code is adapted from lectures 10-12 in COMP SCI 1102 Object Oriented Programming 2015. University of Adelaide
+// to run the code, type g++ -Wall <filename>.cpp and then ENTER. this will create an executable object file.
+// then type ./a.out to run the executable file
 #include <iostream>
 #include <string>
 
@@ -95,13 +98,20 @@ int main(){
   // Stack objects -- can also use dynamic variables
   // Generic Animal
   Animal A1("Bob","chicken", 40);
+  // General function that simply states that a noise is being made
   A1.makeNoise();
   cout << "Panda: ";
-  // Panda
+  // Panda makes a "grrrr" noise
   Panda P1("Petra","fish",26);
   P1.makeNoise();
   cout << "Tiger: ";
-  // Tiger
+  // Tiger makes a "meeoow" noise
   Tiger T1("Ted","carrots",37);
   T1.makeNoise();
+  
+  // However, I can still refer to the general noisemaking ability of the Panda/Tiger.
+  // In this case I have chosen the Tiger.
+  // Polymorphism is a powerful tool!
+  Animal A2 = T1;
+  A2.makeNoise();
 }
